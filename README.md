@@ -6,8 +6,8 @@ This small project uses the api.iextrading.com stock API to fetch and retrieve s
 
 ### Dependencies
 
-As you can see, the script is named 'conkystocks.py' and should be placed in your $HOME/.conky directory.  It has been tested on Python 3.5 with and imports
-'json' and 'urllib'.
+As you can see, the script is named 'conkystocks.py' and should be placed in your $HOME/.conky directory.  It has been tested on Python 3.5 on Linux and
+imports 'json' and 'urllib'.
 
 ### Market Indexes
 
@@ -18,9 +18,11 @@ For these two symbols conkystock.py will convert them to the associated price an
 
 To define which stocks are fetched, put your stock symbols in the stocks.json file in the JSON array, like so:
 
+```
   {
     "stocks" : ["dia", "nvda", "jcap", "tsm", "msft", "fxf", "sds"]
   }
+```
 
 The stocks.json file should be colocated with comnystocks.py in your $HOME/.conky directory.
 
@@ -28,6 +30,7 @@ The stocks.json file should be colocated with comnystocks.py in your $HOME/.conk
 
 Typically used with execi like so:
 
+```
   ${voffset 2}${color}${execi 30 echo $(./conkystocks.py)}
-  
+```  
 
