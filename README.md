@@ -12,7 +12,8 @@ imports 'json' and 'urllib'.
 ### Market Indexes
 
 As far as I can tell, api.iextrading.com does not support the Dow Jones Index or S&P 500.  However, it does support the related ETFs DIA and SPY.
-For these two symbols conkystock.py will convert them to the associated price and change of the indexes.
+For these two symbols conkystock.py will convert them to the approximate price and change of the indexes if the "CONVERT_FUNDS_TO_INDEXES" in
+conkystocks.py is set to True.
 
 ## Configuration
 

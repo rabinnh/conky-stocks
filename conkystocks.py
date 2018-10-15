@@ -3,10 +3,11 @@
 import json
 import urllib.request
 
+DEBUG = False
 URL = "https://api.iextrading.com/1.0/stock/{0}/quote"
 CONFIG_FILE = './stocks.json'
+CONVERT_FUNDS_TO_INDEXES = False
 
-# Getch a stock price
 def get(url):
     req = urllib.request.Request(url)
     with urllib.request.urlopen(req) as response:
@@ -19,15 +20,13 @@ def get(url):
 Main
 """
 def main():
-    # Read the stocks config file
+    # Read config
     fp = open(CONFIG_FILE, 'r')
     stocks = json.load(fp)
     fp.close()
     output = ''
-    # Iterate through the stocks and get the prices
     for stock in stocks['stocks']:
         url = URL.format(stock)
-        # If we can't fetch a stock price, mark it as 'N/A'
         try:	
             s = get(url).decode("utf-8")
             data = json.loads(s)
@@ -36,21 +35,19 @@ def main():
             data['symbol'] = stock.upper()
             data['latestPrice'] = 'N/A'
             data['change'] = 'N/A'
-            data['changePercent'] = 'N/A'
-        # If not the first line add a newline
+            data['changePercent'] = '0/0'
         if len(output) != 0:
             output += '\\n'
-        # If the symbol is 'DIA' convert it from the ETF to the full DJIA stock price
-        if data['symbol'] == 'DIA':
-            data['symbol'] = 'DJIA'
-            data['latestPrice'] = int(data['latestPrice'] * 100)
-            data['change'] = int(data['change'] * 100)
-        # If the symbol is 'SPY' convert it from the ETF to the full S&P 500 stock price
-        if data['symbol'] == 'SPY':
-            data['symbol'] = 'S&P'
-            data['latestPrice'] = int(data['latestPrice'] * 10)
-            data['change'] = int(data['change'] * 10)
-        output += '{0} {1} {2}'.format(data['symbol'], data['latestPrice'], data['change'], int(data['changePercent'] * 1000) / 10)
+        if CONVERT_FUNDS_TO_INDEXES:
+            if data['symbol'] == 'DIA':
+                data['symbol'] = 'DJIA'
+                data['latestPrice'] = int(data['latestPrice'] * 100)
+                data['change'] = int(data['change'] * 100)
+            if data['symbol'] == 'SPY':
+                data['symbol'] = 'S&P'
+                data['latestPrice'] = int(data['latestPrice'] * 10)
+                data['change'] = int(data['change'] * 10)
+        output += '{0} {1} {2} {3}'.format(data['symbol'], data['latestPrice'], data['change'], int(data['changePercent'] * 1000) / 10)
 
     print(output)
 
