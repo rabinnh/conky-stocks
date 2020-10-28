@@ -4,8 +4,6 @@ import json
 import urllib.request
 
 DEBUG = False
-URL = "https://cloud.iexapis.com/v1/stock/{0}/quote"
-URL = "https://query1.finance.yahoo.com/v7/finance/quote?fields=regularMarketPrice&symbols={}"
 URL = 'https://query1.finance.yahoo.com/v7/finance/quote?symbols={}'
 CONFIG_FILE = './stocks.json'
 CONVERT_FUNDS_TO_INDEXES = True
@@ -41,8 +39,6 @@ def main():
             data['latestPrice'] = 'N/A'
             data['change'] = 'N/A'
             data['changePercent'] = 0.0
-        #if len(output) != 0:
-        #    output += '\\n'
         data = data['quoteResponse']['result'][0]
         if CONVERT_FUNDS_TO_INDEXES:
             if data['symbol'] == 'DIA':
