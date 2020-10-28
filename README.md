@@ -1,6 +1,6 @@
 # conky-stocks
 
-This small project uses the api.iextrading.com stock API to fetch and retrieve stock prices for Conky
+This small project uses the Yahoo stock API to fetch and retrieve stock prices for Conky
 
 ## Script
 
@@ -25,13 +25,13 @@ To define which stocks are fetched, put your stock symbols in the stocks.json fi
   }
 ```
 
-The stocks.json file should be colocated with comnystocks.py in your $HOME/.conky directory.
+The stocks.json file should be colocated with conkystocks.py in your $HOME/.conky directory.
 
 ## To use in Conky
 
 Typically used with execi like so:
 
 ```
-  ${voffset 2}${color}${execi 30 echo $(./conkystocks.py)}
+${execpi 60 ./conkystocks.py | column -t}
 ```  
 
