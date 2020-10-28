@@ -1,0 +1,61 @@
+#!/usr/bin/conky -d -c
+##	.conkyrc configuration
+alignment top_right
+background yes
+#border_margin 5
+border_width 5
+color0 555555			#
+color1 FCAF3E			# zolty
+#color2 64574e			# braz
+color2 20b73c
+color3 a82553			# rozowy f71f84
+color4 5e1014			# bordowy
+color5 64574e			# braz
+color6 a7a7a7			# szary
+color7 8888CC			#  (COOL)
+color8 9d9c61			# zolto-szary
+color9 888888			# niebiesko-szary
+cpu_avg_samples 2
+default_color e1e1e1		# szary a7a7a7
+default_outline_color 000000 # Black
+default_shade_color 000000	# Black
+double_buffer yes
+draw_borders no
+draw_graph_borders no
+draw_outline no
+draw_shades yes
+gap_x 630
+gap_y 1018
+max_specials 1024
+max_user_text 10000
+maximum_width 234
+minimum_size 600
+net_avg_samples 2
+no_buffers yes
+override_utf8_locale yes
+
+own_window yes
+own_window_type dock
+own_window_colour 000000
+own_window_transparent no 
+own_window_argb_visual yes
+own_window_argb_value 0  
+own_window_hints undecorated,sticky,skip_taskbar,skip_pager,below
+
+pad_percents 2			# to co nizej, miejsc po przecinku
+short_units yes			# krotka wersja podawania wielkosci dyskow np. 612.21M/3.80G
+stippled_borders 3
+text_buffer_size 8000
+total_run_times 0
+update_interval 1.0
+uppercase no
+use_spacer right
+use_xft yes
+xftalpha 0.75
+xftfont sans:size=8
+
+
+TEXT
+${voffset 0}${color2}${font led:size=10}STOCKS ${font}$hr
+${font Ubuntu Mono:size=10}${voffset 2}${color}${execpi 60 ./conkystocks.py | column -t}
+
